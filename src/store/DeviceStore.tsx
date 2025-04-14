@@ -453,7 +453,7 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       }
 
       // Refresh scenes list
-      fetchScenes();
+      await fetchScenes();
 
       toast({
         title: "Szene erstellt",
