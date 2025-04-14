@@ -8,10 +8,7 @@ import { DeviceProvider } from "./store/DeviceStore";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DeviceManagement from "./pages/DeviceManagement";
-
-// Dummy Seiten für den Moment
-const Automation = () => <div className="p-6"><h1 className="text-2xl font-bold">Automatisierungen</h1><p className="mt-4">Diese Seite wird bald verfügbar sein.</p></div>;
-const Settings = () => <div className="p-6"><h1 className="text-2xl font-bold">Einstellungen</h1><p className="mt-4">Diese Seite wird bald verfügbar sein.</p></div>;
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -24,9 +21,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/devices" element={<DeviceManagement />} />
-            <Route path="/automation" element={<Automation />} />
-            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
