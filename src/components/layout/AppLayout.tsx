@@ -3,7 +3,8 @@ import React, { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { Home, Settings, Menu } from 'lucide-react';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup } from '@/components/ui/sidebar';
-import { ThemeProvider, ThemeToggle } from '@/components/layout/ThemeToggle';
+import { ThemeProvider } from 'next-themes';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -11,7 +12,7 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="butler-theme">
+    <ThemeProvider defaultTheme="light" attribute="class" storageKey="butler-theme">
       <SidebarProvider>
         <div className="min-h-screen flex w-full bg-background">
           <Sidebar>
@@ -59,7 +60,6 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                   <h1 className="ml-4 text-lg font-semibold md:text-xl">Smart Home Dashboard</h1>
                 </div>
                 <div className="flex items-center space-x-2">
-                  {/* Fix: Remove the props that might be causing the issue */}
                   <ThemeToggle />
                 </div>
               </div>
