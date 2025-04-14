@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Settings, Menu, X, Moon, Sun } from 'lucide-react';
+import { Home, Settings, Menu } from 'lucide-react';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup } from '@/components/ui/sidebar';
 import { ThemeProvider, ThemeToggle } from '@/components/layout/ThemeToggle';
 
@@ -59,7 +59,8 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                   <h1 className="ml-4 text-lg font-semibold md:text-xl">Smart Home Dashboard</h1>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <ThemeToggle variant="ghost" size="icon" />
+                  {/* Fix: Remove the props that might be causing the issue */}
+                  <ThemeToggle />
                 </div>
               </div>
             </header>
