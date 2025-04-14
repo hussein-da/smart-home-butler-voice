@@ -6,6 +6,7 @@ import RoomDevices from '@/components/RoomDevices';
 import { useDevices } from '@/store/DeviceStore';
 import { PlusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Room } from '@/lib/types';
 
 const Index = () => {
   const { devices, loading } = useDevices();
@@ -66,6 +67,9 @@ const Index = () => {
     );
   }
 
+  // Fixed the type issue here by ensuring we only use valid Room values
+  const validRooms: Room[] = ['Wohnzimmer', 'Küche', 'Schlafzimmer', 'Badezimmer', 'Flur', 'Büro'];
+
   return (
     <AppLayout>
       <div className="space-y-6">
@@ -78,7 +82,7 @@ const Index = () => {
             </Button>
           </Link>
         </div>
-        {['Wohnzimmer', 'Küche', 'Schlafzimmer', 'Badezimmer', 'Büro'].map((room) => (
+        {validRooms.map((room) => (
           <RoomDevices key={room} room={room} />
         ))}
       </div>

@@ -29,8 +29,8 @@ const DeviceConfig: React.FC<DeviceConfigProps> = ({ device }) => {
     await updateDeviceConfig(device.id, {
       name: config.name,
       room: config.room,
-      ip_address: config.ipAddress,
-      firmware_version: config.firmwareVersion
+      ipAddress: config.ipAddress,
+      firmwareVersion: config.firmwareVersion
     });
     setIsOpen(false);
   };
@@ -44,7 +44,7 @@ const DeviceConfig: React.FC<DeviceConfigProps> = ({ device }) => {
   const handleFirmwareUpdate = () => {
     // Simulate firmware update
     updateDeviceConfig(device.id, {
-      firmware_version: '1.1.0'
+      firmwareVersion: '1.1.0'
     });
   };
 
