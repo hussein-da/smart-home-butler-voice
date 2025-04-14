@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Device, DeviceState, Room } from '@/lib/types';
+import { Device, DeviceState, Room, DeviceType } from '@/lib/types';
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -59,10 +59,18 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         throw fetchError;
       }
 
+      // Map the database results to our Device type, ensuring correct typing
       setDevices(data.map(device => ({
-        ...device,
-        lastUpdated: new Date(device.updated_at)
+        id: device.id,
+        name: device.name,
+        // Convert the string type to our DeviceType enum
+        type: device.type as DeviceType,
+        // Convert the string room to our Room enum
+        room: device.room as Room,
+        state: device.state as DeviceState,
+        lastUpdated: new Date(device.updated_at || new Date())
       })));
+      
       setLoading(false);
     } catch (err) {
       console.error('Error fetching devices:', err);
