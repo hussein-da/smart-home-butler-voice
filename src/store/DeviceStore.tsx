@@ -1,8 +1,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { mockDevices, updateDevice as mockUpdateDevice } from '@/lib/mockData';
 import { Device, DeviceState, Room } from '@/lib/types';
 import { toast } from '@/components/ui/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface DeviceContextType {
   devices: Device[];
@@ -24,44 +24,81 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [recentCommands, setRecentCommands] = useState<string[]>([]);
 
   useEffect(() => {
-    // Simulate API fetch with a delay
-    const fetchDevices = async () => {
-      try {
-        // Mock API delay
-        await new Promise(resolve => setTimeout(resolve, 800));
-        setDevices(mockDevices);
-        setLoading(false);
-      } catch (err) {
-        setError('Fehler beim Laden der Geräte');
-        setLoading(false);
-      }
-    };
-
+    // Fetch initial devices data
     fetchDevices();
+
+    // Set up real-time subscription
+    const channel = supabase
+      .channel('device-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'devices'
+        },
+        (payload) => {
+          console.log('Real-time update received:', payload);
+          fetchDevices(); // Refresh devices when changes occur
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
+
+  const fetchDevices = async () => {
+    try {
+      const { data, error: fetchError } = await supabase
+        .from('devices')
+        .select('*');
+
+      if (fetchError) {
+        throw fetchError;
+      }
+
+      setDevices(data.map(device => ({
+        ...device,
+        lastUpdated: new Date(device.updated_at)
+      })));
+      setLoading(false);
+    } catch (err) {
+      console.error('Error fetching devices:', err);
+      setError('Fehler beim Laden der Geräte');
+      setLoading(false);
+      toast({
+        title: "Fehler",
+        description: 'Geräte konnten nicht geladen werden.',
+        variant: "destructive"
+      });
+    }
+  };
 
   const updateDevice = async (id: string, newState: Partial<DeviceState>) => {
     setLoading(true);
     try {
-      // Mock API delay
-      await new Promise(resolve => setTimeout(resolve, 300));
-      const updatedDevice = mockUpdateDevice(id, newState);
-      
-      if (!updatedDevice) {
-        throw new Error('Gerät nicht gefunden');
+      const { data, error: updateError } = await supabase
+        .from('devices')
+        .update({ 
+          state: { ...devices.find(d => d.id === id)?.state, ...newState },
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (updateError) {
+        throw updateError;
       }
-      
-      setDevices(prevDevices => 
-        prevDevices.map(device => 
-          device.id === id ? updatedDevice : device
-        )
-      );
-      
+
       toast({
         title: "Gerät aktualisiert",
-        description: `${updatedDevice.name} (${updatedDevice.room}) wurde aktualisiert.`,
+        description: `${data.name} wurde aktualisiert.`,
       });
     } catch (err) {
+      console.error('Error updating device:', err);
       setError('Fehler beim Aktualisieren des Geräts');
       toast({
         title: "Fehler",
@@ -81,8 +118,17 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     return Array.from(new Set(devices.map(device => device.room)));
   };
 
-  const addCommand = (command: string) => {
-    setRecentCommands(prev => [command, ...prev].slice(0, 5));
+  const addCommand = async (command: string) => {
+    try {
+      await supabase.from('commands_history').insert({
+        command,
+        executed_at: new Date().toISOString()
+      });
+      
+      setRecentCommands(prev => [command, ...prev].slice(0, 5));
+    } catch (err) {
+      console.error('Error saving command:', err);
+    }
   };
 
   return (
