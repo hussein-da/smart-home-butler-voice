@@ -56,7 +56,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 <div className="flex items-center">
                   <SidebarTrigger asChild>
                     <Button variant="ghost" size="icon">
-                      <Menu className="h-5 w-5" />
+                      <div className="flex items-center justify-center">
+                        <Menu className="h-5 w-5" />
+                      </div>
                     </Button>
                   </SidebarTrigger>
                   <h1 className="ml-4 text-lg font-semibold md:text-xl">Smart Home Dashboard</h1>
