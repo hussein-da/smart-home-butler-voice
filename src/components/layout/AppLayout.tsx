@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Settings, Menu, Cpu, Lightbulb, PanelLeftOpen } from 'lucide-react';
+import { Home, Settings, Cpu, Lightbulb, PanelLeftOpen } from 'lucide-react';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup } from '@/components/ui/sidebar';
 import { ThemeProvider } from 'next-themes';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
@@ -48,14 +48,24 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                       Geräteverwaltung
                     </Button>
                   </Link>
-                  <Button variant="ghost" className="w-full justify-start text-muted-foreground">
-                    <Lightbulb className="mr-2 h-4 w-4" />
-                    Automatisierung
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start text-muted-foreground">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Einstellungen
-                  </Button>
+                  <Link to="/automation">
+                    <Button 
+                      variant={location.pathname === '/automation' ? "secondary" : "ghost"} 
+                      className="w-full justify-start"
+                    >
+                      <Lightbulb className="mr-2 h-4 w-4" />
+                      Automatisierung
+                    </Button>
+                  </Link>
+                  <Link to="/settings">
+                    <Button 
+                      variant={location.pathname === '/settings' ? "secondary" : "ghost"} 
+                      className="w-full justify-start"
+                    >
+                      <Settings className="mr-2 h-4 w-4" />
+                      Einstellungen
+                    </Button>
+                  </Link>
                 </div>
               </SidebarGroup>
             </SidebarContent>
@@ -81,6 +91,8 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                   <h1 className="ml-4 text-lg font-semibold md:text-xl">
                     {location.pathname === '/' && 'Smart Home Dashboard'}
                     {location.pathname === '/devices' && 'Geräteverwaltung'}
+                    {location.pathname === '/automation' && 'Automatisierung'}
+                    {location.pathname === '/settings' && 'Einstellungen'}
                   </h1>
                 </div>
                 <div className="flex items-center space-x-2">

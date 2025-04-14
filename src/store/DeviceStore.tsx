@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Device, DeviceState, Room, DeviceType, Scene, ConnectionStatus } from '@/lib/types';
 import { toast } from '@/components/ui/use-toast';
@@ -236,6 +237,9 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         title: "Gerät aktualisiert",
         description: `${data.name} wurde aktualisiert.`,
       });
+      
+      // Update local device state
+      await fetchDevices();
     } catch (err) {
       console.error('Error updating device:', err);
       setError('Fehler beim Aktualisieren des Geräts');
@@ -338,7 +342,8 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         description: `${data.name} wurde erfolgreich hinzugefügt.`,
       });
       
-      fetchDevices(); // Refresh device list
+      // Refresh device list
+      await fetchDevices();
     } catch (err) {
       console.error('Error pairing device:', err);
       toast({
@@ -380,6 +385,9 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         title: "Gerät entfernt",
         description: `${device.name} wurde erfolgreich entfernt.`,
       });
+      
+      // Refresh device list
+      await fetchDevices();
     } catch (err) {
       console.error('Error unpairing device:', err);
       toast({
@@ -424,6 +432,9 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         title: "Konfiguration aktualisiert",
         description: `Konfiguration für ${data.name} wurde aktualisiert.`,
       });
+      
+      // Refresh device list
+      await fetchDevices();
     } catch (err) {
       console.error('Error updating device configuration:', err);
       toast({
@@ -523,11 +534,8 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         throw insertError;
       }
 
-      // Update local state
-      setDeviceGroups(prev => ({
-        ...prev,
-        [name]: deviceIds
-      }));
+      // Update local state and fetch updated device groups
+      await fetchDeviceGroups();
 
       toast({
         title: "Gerätegruppe erstellt",
@@ -566,6 +574,8 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
           .eq('id', device.id)
           .then(() => {
             console.log(`Device ${device.name} is now offline`);
+            // Refresh devices to update UI
+            fetchDevices();
           })
           .catch(err => {
             console.error('Error updating device connection status:', err);
@@ -620,7 +630,8 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         executed_at: new Date().toISOString()
       });
       
-      setRecentCommands(prev => [command, ...prev].slice(0, 5));
+      // Update recent commands list
+      await fetchCommandHistory();
     } catch (err) {
       console.error('Error saving command:', err);
     }
