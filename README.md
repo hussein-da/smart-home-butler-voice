@@ -1,8 +1,14 @@
-# Welcome to your Lovable project
+
+# Smart Home Butler Voice - Test Project
+
+**DISCLAIMER: This is a test project only and not for commercial use.**
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/6c7038be-9f8b-4955-b960-156acf9747fd
+
+**Created by**: Hussein Daoud  
+**Contact**: [GitHub](https://github.com/hussein-da)
 
 ## How can I edit this code?
 
@@ -59,6 +65,7 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Supabase (for backend)
 
 ## How can I deploy this project?
 
