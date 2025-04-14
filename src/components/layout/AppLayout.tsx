@@ -18,8 +18,8 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           <Sidebar>
             <SidebarHeader className="flex items-center py-4">
               <div className="flex items-center space-x-2 px-4">
-                <div className="w-8 h-8 rounded-full bg-butler-primary flex items-center justify-center">
-                  <Home className="h-4 w-4 text-white" />
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <Home className="h-4 w-4 text-primary-foreground" />
                 </div>
                 <span className="font-bold text-lg">SmartHome Butler</span>
               </div>
@@ -59,9 +59,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                   </SidebarTrigger>
                   <h1 className="ml-4 text-lg font-semibold md:text-xl">Smart Home Dashboard</h1>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <ThemeToggle />
-                </div>
+                <ThemeToggle />
               </div>
             </header>
 
