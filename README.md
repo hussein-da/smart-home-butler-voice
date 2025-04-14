@@ -1,76 +1,83 @@
 
-# Smart Home Butler Voice
+# Smart Home Butler - Sprachgesteuerter Smart Home Assistent
 
-**DISCLAIMER: This is a test project only and not for commercial use.**
+**DISCLAIMER: Dies ist ein Testprojekt und nicht für den kommerziellen Einsatz bestimmt.**
 
-**Created by**: Hussein Daoud  
-**Contact**: [GitHub](https://github.com/hussein-da)
+## Vision & Konzept
 
-## How can I edit this code?
+Smart Home Butler ist ein innovativer Sprachassistent, der Ihr Smart Home auf eine natürliche und intuitive Art steuert. Das Projekt zielt darauf ab, die Komplexität moderner Smart Home Systeme durch natürlichsprachliche Befehle zu vereinfachen.
 
-There are several ways of editing your application.
+### Hauptfunktionen
 
-**Use Lovable**
+- 🎤 **Sprachsteuerung**: Natürliche Kommunikation mit Ihrem Smart Home
+- 🏠 **Gerätemanagement**: Intelligente Verwaltung aller Smart Home Geräte
+- 🔄 **Automatisierung**: Erstellung von Szenen und Routinen
+- 📊 **Dashboard**: Übersichtliche Visualisierung aller Geräte und deren Status
+- 🔐 **Sicherheit**: Robuste Authentifizierung und Datenschutz
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6c7038be-9f8b-4955-b960-156acf9747fd) and start prompting.
+## Technologie-Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+Das Projekt nutzt moderne Technologien für maximale Performance und Benutzerfreundlichkeit:
 
-**Use your preferred IDE**
+### Frontend
+- **React** mit **TypeScript** für typsichere Entwicklung
+- **Vite** als Build-Tool für schnelle Entwicklung
+- **Tailwind CSS** & **shadcn/ui** für responsives, modernes Design
+- **React Query** für effizientes State Management
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Backend
+- **Supabase** als Backend-as-a-Service
+  - Realtime Datenbank
+  - Authentifizierung
+  - Row Level Security
+  - Edge Functions
+  - Storage
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Lokale Entwicklung
 
-Follow these steps:
+1. Klonen Sie das Repository:
+```bash
+git clone <repository-url>
+cd smart-home-butler
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2. Installieren Sie die Abhängigkeiten:
+```bash
+npm install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Starten Sie den Entwicklungsserver:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Projektstruktur
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+  ├── components/     # UI Komponenten
+  ├── pages/         # Hauptseiten
+  ├── store/         # State Management
+  ├── lib/          # Utilities und Types
+  └── integrations/  # Externe Dienste (Supabase)
+```
 
-**Use GitHub Codespaces**
+## Ideen & Weiterentwicklung
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Das Projekt ist in kontinuierlicher Entwicklung. Geplante Features:
 
-## What technologies are used for this project?
+- KI-gestützte Automatisierungen
+- Erweitertes Energiemanagement
+- Integration weiterer Smart Home Systeme
+- Mobile App mit React Native
 
-This project is built with:
+## Kontakt & Beitrag
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- Supabase (for backend)
+Entwickelt von Hussein Daoud
 
-## How can I deploy this project?
+- GitHub: [hussein-da](https://github.com/hussein-da)
+- Für Fragen, Ideen oder Zusammenarbeit, kontaktieren Sie mich gerne über GitHub
 
-Simply open [Lovable](https://lovable.dev/projects/6c7038be-9f8b-4955-b960-156acf9747fd) and click on Share -> Publish.
+## Lizenz
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Dieses Projekt ist ausschließlich für Testzwecke bestimmt und nicht für den kommerziellen Einsatz freigegeben.
