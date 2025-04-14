@@ -42,7 +42,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
               <div className="px-3 py-2">
                 <div className="flex items-center justify-between px-4 py-2">
                   <span className="text-sm text-muted-foreground">© 2025 Butler</span>
-                  <ThemeToggle />
+                  <div className="flex-shrink-0">
+                    <ThemeToggle />
+                  </div>
                 </div>
               </div>
             </SidebarFooter>
@@ -59,7 +61,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                   </SidebarTrigger>
                   <h1 className="ml-4 text-lg font-semibold md:text-xl">Smart Home Dashboard</h1>
                 </div>
-                <ThemeToggle />
+                <div className="flex-shrink-0">
+                  <ThemeToggle />
+                </div>
               </div>
             </header>
 
