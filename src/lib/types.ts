@@ -1,4 +1,3 @@
-
 export type DeviceType = 'LIGHT' | 'THERMOSTAT' | 'SWITCH' | 'BLIND' | 'SENSOR';
 
 export type Room = 'Wohnzimmer' | 'Küche' | 'Schlafzimmer' | 'Badezimmer' | 'Flur' | 'Büro';

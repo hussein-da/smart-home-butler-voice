@@ -1,8 +1,8 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Device, DeviceState, Room, DeviceType, Scene, ConnectionStatus } from '@/lib/types';
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Json } from '@/integrations/supabase/types';
 
 interface DeviceContextType {
   devices: Device[];
@@ -116,13 +116,10 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         throw fetchError;
       }
 
-      // Map the database results to our Device type, ensuring correct typing
       setDevices(data.map(device => ({
         id: device.id,
         name: device.name,
-        // Convert the string type to our DeviceType enum
         type: device.type as DeviceType,
-        // Convert the string room to our Room enum
         room: device.room as Room,
         state: device.state as DeviceState,
         lastUpdated: new Date(device.updated_at || new Date()),
@@ -160,7 +157,7 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       setScenes(data.map(scene => ({
         id: scene.id,
         name: scene.name,
-        deviceStates: scene.device_states,
+        deviceStates: scene.device_states as Record<string, Partial<DeviceState>>,
         createdAt: new Date(scene.created_at)
       })));
     } catch (err) {
@@ -313,22 +310,13 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const pairDevice = async (discoveredDevice: Partial<Device>) => {
     setLoading(true);
     try {
-      // Simulate pairing process
-      toast({
-        title: "Verbindung wird hergestellt",
-        description: `Verbinde mit ${discoveredDevice.name}...`,
-      });
-      
-      // Add a delay to simulate pairing process
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
       const newDevice = {
         name: discoveredDevice.name || 'Unbekanntes Gerät',
         type: discoveredDevice.type || 'SWITCH',
-        room: 'Wohnzimmer' as Room, // Default room
-        state: { on: false } as DeviceState,
-        mac_address: discoveredDevice.macAddress,
+        room: 'Wohnzimmer' as Room,
+        state: JSON.stringify({ on: false }),
         ip_address: discoveredDevice.ipAddress,
+        mac_address: discoveredDevice.macAddress,
         manufacturer: discoveredDevice.manufacturer,
         model: discoveredDevice.model,
         firmware_version: '1.0.0',
@@ -350,8 +338,7 @@ export const DeviceProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         description: `${data.name} wurde erfolgreich hinzugefügt.`,
       });
       
-      // Remove from discovered devices list
-      setDiscoveredDevices(prev => prev.filter(d => d.macAddress !== discoveredDevice.macAddress));
+      fetchDevices(); // Refresh device list
     } catch (err) {
       console.error('Error pairing device:', err);
       toast({

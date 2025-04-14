@@ -30,10 +30,37 @@ export type Database = {
         }
         Relationships: []
       }
-      devices: {
+      device_groups: {
         Row: {
           created_at: string | null
+          device_ids: string[]
           id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          device_ids?: string[]
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          device_ids?: string[]
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      devices: {
+        Row: {
+          connection_status: string | null
+          created_at: string | null
+          firmware_version: string | null
+          id: string
+          ip_address: string | null
+          mac_address: string | null
+          manufacturer: string | null
+          model: string | null
           name: string
           room: string
           state: Json
@@ -41,8 +68,14 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          connection_status?: string | null
           created_at?: string | null
+          firmware_version?: string | null
           id?: string
+          ip_address?: string | null
+          mac_address?: string | null
+          manufacturer?: string | null
+          model?: string | null
           name: string
           room: string
           state?: Json
@@ -50,8 +83,14 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          connection_status?: string | null
           created_at?: string | null
+          firmware_version?: string | null
           id?: string
+          ip_address?: string | null
+          mac_address?: string | null
+          manufacturer?: string | null
+          model?: string | null
           name?: string
           room?: string
           state?: Json
@@ -76,6 +115,27 @@ export type Database = {
         Update: {
           created_at?: string | null
           icon?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      scenes: {
+        Row: {
+          created_at: string | null
+          device_states: Json
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          device_states?: Json
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          device_states?: Json
           id?: string
           name?: string
         }
