@@ -1,83 +1,83 @@
 
-# Smart Home Butler - Sprachgesteuerter Smart Home Assistent
+# Smart Home Butler - Voice-Controlled Smart Home Assistant
 
-**DISCLAIMER: Dies ist ein Testprojekt und nicht für den kommerziellen Einsatz bestimmt.**
+**DISCLAIMER: This is a test project and not intended for commercial use.**
 
-## Vision & Konzept
+## Vision & Concept
 
-Smart Home Butler ist ein innovativer Sprachassistent, der Ihr Smart Home auf eine natürliche und intuitive Art steuert. Das Projekt zielt darauf ab, die Komplexität moderner Smart Home Systeme durch natürlichsprachliche Befehle zu vereinfachen.
+Smart Home Butler is an innovative voice assistant that controls your smart home in a natural and intuitive way. The project aims to simplify the complexity of modern smart home systems through natural language commands.
 
-### Hauptfunktionen
+### Key Features
 
-- 🎤 **Sprachsteuerung**: Natürliche Kommunikation mit Ihrem Smart Home
-- 🏠 **Gerätemanagement**: Intelligente Verwaltung aller Smart Home Geräte
-- 🔄 **Automatisierung**: Erstellung von Szenen und Routinen
-- 📊 **Dashboard**: Übersichtliche Visualisierung aller Geräte und deren Status
-- 🔐 **Sicherheit**: Robuste Authentifizierung und Datenschutz
+- 🎤 **Voice Control**: Natural communication with your Smart Home
+- 🏠 **Device Management**: Intelligent management of all Smart Home devices
+- 🔄 **Automation**: Creation of scenes and routines
+- 📊 **Dashboard**: Comprehensive visualization of all devices and their status
+- 🔐 **Security**: Robust authentication and data privacy
 
-## Technologie-Stack
+## Technology Stack
 
-Das Projekt nutzt moderne Technologien für maximale Performance und Benutzerfreundlichkeit:
+The project leverages modern technologies for maximum performance and user-friendliness:
 
 ### Frontend
-- **React** mit **TypeScript** für typsichere Entwicklung
-- **Vite** als Build-Tool für schnelle Entwicklung
-- **Tailwind CSS** & **shadcn/ui** für responsives, modernes Design
-- **React Query** für effizientes State Management
+- **React** with **TypeScript** for type-safe development
+- **Vite** as build tool for rapid development
+- **Tailwind CSS** & **shadcn/ui** for responsive, modern design
+- **React Query** for efficient state management
 
 ### Backend
-- **Supabase** als Backend-as-a-Service
-  - Realtime Datenbank
-  - Authentifizierung
+- **Supabase** as Backend-as-a-Service
+  - Realtime Database
+  - Authentication
   - Row Level Security
   - Edge Functions
   - Storage
 
-## Lokale Entwicklung
+## Local Development
 
-1. Klonen Sie das Repository:
+1. Clone the repository:
 ```bash
 git clone <repository-url>
 cd smart-home-butler
 ```
 
-2. Installieren Sie die Abhängigkeiten:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Starten Sie den Entwicklungsserver:
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-## Projektstruktur
+## Project Structure
 
 ```
 src/
-  ├── components/     # UI Komponenten
-  ├── pages/         # Hauptseiten
+  ├── components/     # UI Components
+  ├── pages/         # Main pages
   ├── store/         # State Management
-  ├── lib/          # Utilities und Types
-  └── integrations/  # Externe Dienste (Supabase)
+  ├── lib/          # Utilities and Types
+  └── integrations/  # External Services (Supabase)
 ```
 
-## Ideen & Weiterentwicklung
+## Ideas & Further Development
 
-Das Projekt ist in kontinuierlicher Entwicklung. Geplante Features:
+The project is in continuous development. Planned features:
 
-- KI-gestützte Automatisierungen
-- Erweitertes Energiemanagement
-- Integration weiterer Smart Home Systeme
-- Mobile App mit React Native
+- AI-powered automations
+- Advanced energy management
+- Integration of additional Smart Home systems
+- Mobile app with React Native
 
-## Kontakt & Beitrag
+## Contact & Contribution
 
-Entwickelt von Hussein Daoud
+Developed by Hussein Daoud
 
 - GitHub: [hussein-da](https://github.com/hussein-da)
-- Für Fragen, Ideen oder Zusammenarbeit, kontaktieren Sie mich gerne über GitHub
+- For questions, ideas, or collaboration, please contact me via GitHub
 
-## Lizenz
+## License
 
-Dieses Projekt ist ausschließlich für Testzwecke bestimmt und nicht für den kommerziellen Einsatz freigegeben.
+This project is exclusively intended for testing purposes and not approved for commercial use.
