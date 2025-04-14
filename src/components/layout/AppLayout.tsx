@@ -1,16 +1,19 @@
 
 import React, { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Settings, Menu } from 'lucide-react';
+import { Home, Settings, Menu, Cpu, Lightbulb, PanelLeftOpen } from 'lucide-react';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup } from '@/components/ui/sidebar';
 import { ThemeProvider } from 'next-themes';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { Link, useLocation } from 'react-router-dom';
 
 interface AppLayoutProps {
   children: ReactNode;
 }
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+  const location = useLocation();
+  
   return (
     <ThemeProvider defaultTheme="light" attribute="class" storageKey="butler-theme">
       <SidebarProvider>
@@ -27,9 +30,27 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             <SidebarContent>
               <SidebarGroup>
                 <div className="space-y-1 px-3 py-2">
-                  <Button variant="secondary" className="w-full justify-start">
-                    <Home className="mr-2 h-4 w-4" />
-                    Dashboard
+                  <Link to="/">
+                    <Button 
+                      variant={location.pathname === '/' ? "secondary" : "ghost"} 
+                      className="w-full justify-start"
+                    >
+                      <Home className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <Link to="/devices">
+                    <Button 
+                      variant={location.pathname === '/devices' ? "secondary" : "ghost"} 
+                      className="w-full justify-start"
+                    >
+                      <Cpu className="mr-2 h-4 w-4" />
+                      Geräteverwaltung
+                    </Button>
+                  </Link>
+                  <Button variant="ghost" className="w-full justify-start text-muted-foreground">
+                    <Lightbulb className="mr-2 h-4 w-4" />
+                    Automatisierung
                   </Button>
                   <Button variant="ghost" className="w-full justify-start text-muted-foreground">
                     <Settings className="mr-2 h-4 w-4" />
@@ -51,15 +72,18 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           </Sidebar>
 
           <div className="flex-1 flex flex-col min-h-screen">
-            <header className="border-b shadow-sm p-4 bg-background">
+            <header className="border-b shadow-sm p-4 bg-background sticky top-0 z-10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <SidebarTrigger>
-                    <Menu className="h-5 w-5" />
+                    <PanelLeftOpen className="h-5 w-5" />
                   </SidebarTrigger>
-                  <h1 className="ml-4 text-lg font-semibold md:text-xl">Smart Home Dashboard</h1>
+                  <h1 className="ml-4 text-lg font-semibold md:text-xl">
+                    {location.pathname === '/' && 'Smart Home Dashboard'}
+                    {location.pathname === '/devices' && 'Geräteverwaltung'}
+                  </h1>
                 </div>
-                <div className="flex-shrink-0">
+                <div className="flex items-center space-x-2">
                   <ThemeToggle />
                 </div>
               </div>

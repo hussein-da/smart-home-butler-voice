@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useDevices } from '@/store/DeviceStore';
-import DeviceCard from './DeviceCard';
+import DeviceCardExtended from './DeviceCardExtended';
 import { Room } from '@/lib/types';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { ChevronDown, ChevronRight, Home } from 'lucide-react';
@@ -48,7 +48,7 @@ const RoomDevices: React.FC<RoomDevicesProps> = ({ room }) => {
         <CollapsibleContent>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
             {devices.map((device) => (
-              <DeviceCard key={device.id} device={device} />
+              <DeviceCardExtended key={device.id} device={device} />
             ))}
           </CardContent>
         </CollapsibleContent>
